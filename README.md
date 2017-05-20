@@ -17,11 +17,13 @@ Authors:
   * Once a user connects via the websocket endpoint, the server stores their public key and adds it to the list of connected users. Whenever a new user joins, they receive a join message for every connected user with the following format:
     {"user":"Alec","publicModulus": … ,"publicExponent": … ,"type":"join"}
   * All other clients receive a join message for the new user.
+  ![picture alt](http://i.imgur.com/FbAx7Pv.png "Connection")
   ### Chat:
   * The server listens on the websocket for messages of the following format:
     {“to”: “bob”, “from”: “alice”, “message”: “<encrypted>”, “type”: “chat”}
   * The server finds the channel belonging to the user in the ‘from’ field and writes the message to their socket.
   * Whenever a user leaves, all clients receive a leave message and the user is removed from the list.
+  ![picture alt](http://i.imgur.com/yYyBkqt.png "Messages")
   ### Client Summary:
   * The client first generates a set of keys (public/private).
   * The client attempts to connect to the server at the specified URI, open a websocket, and send the required fields in the headers.
